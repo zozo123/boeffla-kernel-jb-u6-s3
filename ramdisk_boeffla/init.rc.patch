@@ -1,0 +1,27 @@
+--- init.rc	2012-11-30 12:55:59.208578163 +0100
++++ init1.rc	2012-11-30 13:00:01.493652787 +0100
+@@ -763,13 +763,6 @@
+     disabled
+     oneshot
+ 
+-service samsungani /system/bin/samsungani
+-    class main
+-    user graphics
+-    group graphics system
+-    disabled
+-    oneshot
+-
+ service dbus /system/bin/dbus-daemon --system --nofork
+     class main
+     socket dbus stream 660 bluetooth bluetooth
+@@ -883,3 +876,10 @@
+ on property:init.svc.media=restarting
+     exec icd_check
+     start icd
++
++# Call Boeffla-Kernel init script
++service boeffla-init /sbin/boeffla-init.sh
++    class core
++    user root
++    oneshot
++
