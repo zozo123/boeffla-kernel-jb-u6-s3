@@ -3,6 +3,10 @@
  *
  * Version 1.2
  *
+ * credits: Supercurio for ideas and partially code from his Voodoo
+ * 	    sound implementation,
+ *          Gokhanmoral for further modifications to the original code
+ *
  * This software is licensed under the terms of the GNU General Public
  * License version 2, as published by the Free Software Foundation, and
  * may be copied, distributed, and modified under those terms.
@@ -143,7 +147,7 @@ unsigned int Boeffla_sound_hook_wm8994_write(unsigned int reg, unsigned int val)
 	{
 
 		// call detection
-		case WM8994_AIF2_CONTROL_2: 
+		case WM8994_AIF2_CONTROL_2:
 		{
 			if (is_call != check_for_call(val))
 			{
