@@ -99,5 +99,8 @@ sleep 2
 # init.d support
 . /sbin/boeffla-initd.inc
 
+# EFS backup
+. /sbin/boeffla-efsbackup.inc
+
 # Finished
 echo $(date) Boeffla-Kernel initialisation completed >> $BOEFFLA_LOGFILE
