@@ -52,7 +52,7 @@ if ! /sbin/busybox [ "`/sbin/busybox grep scheduler $BOEFFLA_CONFIG`" ]; then
 fi
 
 if ! /sbin/busybox [ "`/sbin/busybox grep governor $BOEFFLA_CONFIG`" ]; then
-	echo "governor=default (default/lulz)" >> $BOEFFLA_CONFIG
+	echo "governor=default (default/lulz/zzmoove)" >> $BOEFFLA_CONFIG
 	echo " " >> $BOEFFLA_CONFIG
 fi
 
