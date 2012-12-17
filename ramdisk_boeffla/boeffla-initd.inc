@@ -12,9 +12,9 @@ if [ ! -d "/system/etc/init.d" ] ; then
 fi
 
 # set permissions of scripts
-/sbin/busybox chmod 777 /system/etc/init.d/*
-/sbin/busybox chmod 777 /data/init.d/*
-/sbin/busybox chmod 777 /etc/init.d/*
+/sbin/busybox chmod 755 /system/etc/init.d/*
+/sbin/busybox chmod 755 /data/init.d/*
+/sbin/busybox chmod 755 /etc/init.d/*
 
 # remount /system back to RO mode
 /sbin/busybox mount -o remount,ro -t ext4 $SYSTEM_DEVICE /system

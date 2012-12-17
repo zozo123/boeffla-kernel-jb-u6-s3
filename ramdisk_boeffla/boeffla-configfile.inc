@@ -83,7 +83,7 @@ if ! /sbin/busybox [ "`/sbin/busybox grep sound_speaker_vol $BOEFFLA_CONFIG`" ];
 fi
 
 if ! /sbin/busybox [ "`/sbin/busybox grep sound_headphone_vol $BOEFFLA_CONFIG`" ]; then
-        echo "sound_headphone_vol=default (default/55/60/62)" >> $BOEFFLA_CONFIG
+        echo "sound_headphone_vol=default (default/55/57/60/62)" >> $BOEFFLA_CONFIG
         echo " " >> $BOEFFLA_CONFIG
 fi
 

@@ -20,6 +20,13 @@ if /sbin/busybox [ "`/sbin/busybox grep sound_headphone_vol=55 $BOEFFLA_CONFIG`"
 	echo $(date) Headphone volume set to 55 >> $BOEFFLA_LOGFILE
 fi
 
+if /sbin/busybox [ "`/sbin/busybox grep sound_headphone_vol=57 $BOEFFLA_CONFIG`" ]; then	
+	echo 1 > /sys/class/misc/boeffla_sound/boeffla_sound
+	echo "57 57" > /sys/class/misc/boeffla_sound/headphone_volume
+
+	echo $(date) Headphone volume set to 57 >> $BOEFFLA_LOGFILE
+fi
+
 if /sbin/busybox [ "`/sbin/busybox grep sound_headphone_vol=60 $BOEFFLA_CONFIG`" ]; then	
 	echo 1 > /sys/class/misc/boeffla_sound/boeffla_sound
 	echo "60 60" > /sys/class/misc/boeffla_sound/headphone_volume
