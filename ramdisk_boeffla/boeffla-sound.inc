@@ -195,3 +195,11 @@ if /sbin/busybox [ "`/sbin/busybox grep sound_mic_mode=noisy $BOEFFLA_CONFIG`" ]
 
         echo $(date) Microphone mode set to noisy >> $BOEFFLA_LOGFILE
 fi
+
+if /sbin/busybox [ "`/sbin/busybox grep sound_mic_mode=light $BOEFFLA_CONFIG`" ]; then
+        echo 1 > /sys/class/misc/boeffla_sound/boeffla_sound
+        echo 3 > /sys/class/misc/boeffla_sound/mic_mode
+
+        echo $(date) Microphone mode set to light >> $BOEFFLA_LOGFILE
+fi
+

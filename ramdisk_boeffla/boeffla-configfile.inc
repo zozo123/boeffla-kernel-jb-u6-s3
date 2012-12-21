@@ -113,7 +113,7 @@ if ! /sbin/busybox [ "`/sbin/busybox grep sound_privacy_mode $BOEFFLA_CONFIG`" ]
 fi
 
 if ! /sbin/busybox [ "`/sbin/busybox grep sound_mic_mode $BOEFFLA_CONFIG`" ]; then
-        echo "sound_mic_mode=default (default/concert/noisy)" >> $BOEFFLA_CONFIG
+        echo "sound_mic_mode=default (default/concert/noisy/light)" >> $BOEFFLA_CONFIG
         echo " " >> $BOEFFLA_CONFIG
 fi
 
