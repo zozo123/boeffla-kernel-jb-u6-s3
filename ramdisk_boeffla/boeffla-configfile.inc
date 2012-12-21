@@ -139,8 +139,13 @@ if ! /sbin/busybox [ "`/sbin/busybox grep kernellogger $BOEFFLA_CONFIG`" ]; then
 fi
 
 
+# Clean up of changed options (where parameters were added)
+/sbin/busybox sed "s/(default\/lulz)/(default\/lulz\/zzmoove)/g" $BOEFFLA_CONFIG -i
+/sbin/busybox sed "s/(default\/55\/60\/62)/(default\/55\/57\/60\/62)/g" $BOEFFLA_CONFIG -i
+/sbin/busybox sed "s/(default\/concert\/noisy)/(default\/concert\/noisy\/light)/g" $BOEFFLA_CONFIG -i
+
 # Finally remove old options that are not required anymore
-sed "/Config file version/d" $BOEFFLA_CONFIG -i
-sed "/bus_undervolting/d" $BOEFFLA_CONFIG -i
-sed "/sound_bypass_outmix/d" $BOEFFLA_CONFIG -i
+/sbin/busybox sed "/Config file version/d" $BOEFFLA_CONFIG -i
+/sbin/busybox sed "/bus_undervolting/d" $BOEFFLA_CONFIG -i
+/sbin/busybox sed "/sound_bypass_outmix/d" $BOEFFLA_CONFIG -i
 
