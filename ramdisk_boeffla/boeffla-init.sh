@@ -45,6 +45,10 @@ fi
 # Custom boot animation support
 . /sbin/boeffla-bootanimation.inc
 
+# Include version information about firmware in log file
+/sbin/busybox grep ro.build.version /system/build.prop >> $BOEFFLA_LOGFILE
+echo "=========================" >> $BOEFFLA_LOGFILE
+
 
 # Now wait for the rom to finish booting up
 # (by checking for any android process)
@@ -53,7 +57,6 @@ while ! /sbin/busybox pgrep com.android ; do
 done
 echo $(date) Rom boot trigger detected, continuing after 8 more seconds... >> $BOEFFLA_LOGFILE
 sleep 8
-
 
 # Kernel logger
 . /sbin/boeffla-kernellogger.inc
@@ -96,6 +99,9 @@ sleep 2
 # IO Scheduler
 . /sbin/boeffla-scheduler.inc
 
+# MDNIE settings (sharpness fix)
+. /sbin/boeffla-mdnie.inc
+
 # init.d support
 . /sbin/boeffla-initd.inc
 
@@ -104,3 +110,4 @@ sleep 2
 
 # Finished
 echo $(date) Boeffla-Kernel initialisation completed >> $BOEFFLA_LOGFILE
+

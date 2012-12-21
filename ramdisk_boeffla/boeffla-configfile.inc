@@ -31,6 +31,14 @@ if ! /sbin/busybox [ "`/sbin/busybox grep systemtweaks $BOEFFLA_CONFIG`" ]; then
 fi
 
 
+# Sharpness fix
+
+if ! /sbin/busybox [ "`/sbin/busybox grep sharpness_fix $BOEFFLA_CONFIG`" ]; then
+	echo "sharpness_fix=off (off/on)" >> $BOEFFLA_CONFIG
+	echo " " >> $BOEFFLA_CONFIG
+fi
+
+
 # Undervolting
 
 if ! /sbin/busybox [ "`/sbin/busybox grep cpu_undervolting $BOEFFLA_CONFIG`" ]; then
