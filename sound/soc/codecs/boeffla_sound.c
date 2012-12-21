@@ -1957,6 +1957,15 @@ static ssize_t debug_reg_store(struct device *dev, struct device_attribute *attr
 }
 
 
+// Version information
+
+static ssize_t version_show(struct device *dev, struct device_attribute *attr, char *buf)
+{
+	// return version information
+	return sprintf(buf, "%s\n", BOEFFLA_SOUND_VERSION);
+}
+
+
 
 /*****************************************/
 // Initialize boeffla sound sysfs folder
@@ -1977,6 +1986,7 @@ static DEVICE_ATTR(mic_mode, S_IRUGO | S_IWUGO, mic_mode_show, mic_mode_store);
 static DEVICE_ATTR(debug_level, S_IRUGO | S_IWUGO, debug_level_show, debug_level_store);
 static DEVICE_ATTR(debug_info, S_IRUGO | S_IWUGO, debug_info_show, debug_info_store);
 static DEVICE_ATTR(debug_reg, S_IRUGO | S_IWUGO, debug_reg_show, debug_reg_store);
+static DEVICE_ATTR(version, S_IRUGO | S_IWUGO, version_show, NULL);
 
 // define attributes
 static struct attribute *boeffla_sound_attributes[] = {
@@ -1994,6 +2004,7 @@ static struct attribute *boeffla_sound_attributes[] = {
 	&dev_attr_debug_level.attr,
 	&dev_attr_debug_info.attr,
 	&dev_attr_debug_reg.attr,
+	&dev_attr_version.attr,
 	NULL
 };
 

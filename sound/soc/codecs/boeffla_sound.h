@@ -33,7 +33,7 @@ unsigned int Boeffla_sound_hook_wm8994_write(unsigned int reg, unsigned int valu
 
 // Boeffla sound general
 #define BOEFFLA_SOUND_DEFAULT 	0
-#define BOEFFLA_SOUND_VERSION 	"1.21"
+#define BOEFFLA_SOUND_VERSION 	"1.3"
 
 // Debug mode
 #define DEBUG_DEFAULT 		1
