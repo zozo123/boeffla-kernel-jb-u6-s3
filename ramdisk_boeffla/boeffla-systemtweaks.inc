@@ -77,3 +77,26 @@ if /sbin/busybox [ "`/sbin/busybox grep systemtweaks=smod $BOEFFLA_CONFIG`" ]; t
 
   echo $(date) Speedmod system tweaks applied >> $BOEFFLA_LOGFILE
 fi
+
+# System tweaks: Only pegasus optimisation of Hardcore Speedmod
+if /sbin/busybox [ "`/sbin/busybox grep systemtweaks=peg $BOEFFLA_CONFIG`" ]; then
+
+  # Pegasus CPU hotplug tweaks
+  echo "500000" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_freq_1_1
+  echo "800000" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_freq_2_1
+  echo "800000" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_freq_3_1
+  echo "400000" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_freq_2_0
+  echo "600000" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_freq_3_0
+  echo "600000" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_freq_4_0
+
+  echo "100" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_rq_1_1
+  echo "100" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_rq_2_0
+  echo "200" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_rq_2_1
+  echo "200" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_rq_3_0
+  echo "300" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_rq_3_1
+  echo "300" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_rq_4_0
+
+  echo "10" > /sys/devices/system/cpu/cpufreq/pegasusq/cpu_down_rate
+
+  echo $(date) Pegasus system tweaks applied >> $BOEFFLA_LOGFILE
+fi

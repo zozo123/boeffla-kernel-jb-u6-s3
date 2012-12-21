@@ -26,7 +26,7 @@ if ! /sbin/busybox [ "`/sbin/busybox grep sdcardtweaks $BOEFFLA_CONFIG`" ]; then
 fi
 
 if ! /sbin/busybox [ "`/sbin/busybox grep systemtweaks $BOEFFLA_CONFIG`" ]; then
-	echo "systemtweaks=on (on/off/smod)" >> $BOEFFLA_CONFIG
+	echo "systemtweaks=on (on/off/smod/peg)" >> $BOEFFLA_CONFIG
 	echo " " >> $BOEFFLA_CONFIG
 fi
 
@@ -143,6 +143,7 @@ fi
 /sbin/busybox sed "s/(default\/lulz)/(default\/lulz\/zzmoove)/g" $BOEFFLA_CONFIG -i
 /sbin/busybox sed "s/(default\/55\/60\/62)/(default\/55\/57\/60\/62)/g" $BOEFFLA_CONFIG -i
 /sbin/busybox sed "s/(default\/concert\/noisy)/(default\/concert\/noisy\/light)/g" $BOEFFLA_CONFIG -i
+/sbin/busybox sed "s/(on\/off\/smod)/(on\/off\/smod\/peg)/g" $BOEFFLA_CONFIG -i
 
 # Finally remove old options that are not required anymore
 /sbin/busybox sed "/Config file version/d" $BOEFFLA_CONFIG -i
