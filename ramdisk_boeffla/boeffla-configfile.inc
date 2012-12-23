@@ -78,7 +78,7 @@ if ! /sbin/busybox [ "`/sbin/busybox grep charge_ac $BOEFFLA_CONFIG`" ]; then
 fi
 
 if ! /sbin/busybox [ "`/sbin/busybox grep charge_usb $BOEFFLA_CONFIG`" ]; then
-	echo "charge_usb=900 (475/700/900)" >> $BOEFFLA_CONFIG
+	echo "charge_usb=475 (475/700/900)" >> $BOEFFLA_CONFIG
 	echo " " >> $BOEFFLA_CONFIG
 fi
 
