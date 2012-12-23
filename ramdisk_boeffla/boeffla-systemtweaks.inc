@@ -39,6 +39,7 @@ if [ -z "$BOEFFLA_CONFIG" ] || /sbin/busybox [ "`/sbin/busybox grep systemtweaks
   /sbin/busybox sysctl -w vm.min_free_kbytes=4096
   /sbin/busybox sysctl -w vm.swappiness=60
   /sbin/busybox sysctl -w vm.vfs_cache_pressure=10
+  /sbin/busybox sync
   /sbin/busybox sysctl -w vm.drop_caches=3
 
   echo $(date) Boeffla-kernel system tweaks applied >> $BOEFFLA_LOGFILE
