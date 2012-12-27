@@ -65,7 +65,7 @@ if ! /sbin/busybox [ "`/sbin/busybox grep governor $BOEFFLA_CONFIG`" ]; then
 fi
 
 if ! /sbin/busybox [ "`/sbin/busybox grep cpu_maxfreq $BOEFFLA_CONFIG`" ]; then
-        echo "cpu_maxfreq=default (default/1200/1000/800/600/400)" >> $BOEFFLA_CONFIG
+        echo "cpu_maxfreq=default (default/200...1400)" >> $BOEFFLA_CONFIG
         echo " " >> $BOEFFLA_CONFIG
 fi
 
@@ -73,12 +73,12 @@ fi
 # Charging
 
 if ! /sbin/busybox [ "`/sbin/busybox grep charge_ac $BOEFFLA_CONFIG`" ]; then
-	echo "charge_ac=1100 (1000/1100/1200)" >> $BOEFFLA_CONFIG
+	echo "charge_ac=1100 (600...1200)" >> $BOEFFLA_CONFIG
 	echo " " >> $BOEFFLA_CONFIG
 fi
 
 if ! /sbin/busybox [ "`/sbin/busybox grep charge_usb $BOEFFLA_CONFIG`" ]; then
-	echo "charge_usb=475 (475/700/900)" >> $BOEFFLA_CONFIG
+	echo "charge_usb=475 (475...900)" >> $BOEFFLA_CONFIG
 	echo " " >> $BOEFFLA_CONFIG
 fi
 
@@ -86,17 +86,42 @@ fi
 # Boeffla-Sound
 
 if ! /sbin/busybox [ "`/sbin/busybox grep sound_speaker_vol $BOEFFLA_CONFIG`" ]; then
-        echo "sound_speaker_vol=default (default/60/63)" >> $BOEFFLA_CONFIG
+        echo "sound_speaker_vol=default (default/57...63)" >> $BOEFFLA_CONFIG
         echo " " >> $BOEFFLA_CONFIG
 fi
 
 if ! /sbin/busybox [ "`/sbin/busybox grep sound_headphone_vol $BOEFFLA_CONFIG`" ]; then
-        echo "sound_headphone_vol=default (default/55/57/60/62)" >> $BOEFFLA_CONFIG
+        echo "sound_headphone_vol=default (default/45...63)" >> $BOEFFLA_CONFIG
         echo " " >> $BOEFFLA_CONFIG
 fi
 
 if ! /sbin/busybox [ "`/sbin/busybox grep sound_eq $BOEFFLA_CONFIG`" ]; then
-        echo "sound_eq=off (off/bass-extreme/bass-treble/treble/classic/pleasant/eargasm)" >> $BOEFFLA_CONFIG
+        echo "sound_eq=off (off/bass-extreme/bass-treble/treble/classic/pleasant/eargasm/custom)" >> $BOEFFLA_CONFIG
+        echo " " >> $BOEFFLA_CONFIG
+fi
+
+if ! /sbin/busybox [ "`/sbin/busybox grep sound_eq_custom1 $BOEFFLA_CONFIG`" ]; then
+        echo "sound_eq_custom1=0 (-12...12)" >> $BOEFFLA_CONFIG
+        echo " " >> $BOEFFLA_CONFIG
+fi
+
+if ! /sbin/busybox [ "`/sbin/busybox grep sound_eq_custom2 $BOEFFLA_CONFIG`" ]; then
+        echo "sound_eq_custom2=0 (-12...12)" >> $BOEFFLA_CONFIG
+        echo " " >> $BOEFFLA_CONFIG
+fi
+
+if ! /sbin/busybox [ "`/sbin/busybox grep sound_eq_custom3 $BOEFFLA_CONFIG`" ]; then
+        echo "sound_eq_custom3=0 (-12...12)" >> $BOEFFLA_CONFIG
+        echo " " >> $BOEFFLA_CONFIG
+fi
+
+if ! /sbin/busybox [ "`/sbin/busybox grep sound_eq_custom4 $BOEFFLA_CONFIG`" ]; then
+        echo "sound_eq_custom4=0 (-12...12)" >> $BOEFFLA_CONFIG
+        echo " " >> $BOEFFLA_CONFIG
+fi
+
+if ! /sbin/busybox [ "`/sbin/busybox grep sound_eq_custom5 $BOEFFLA_CONFIG`" ]; then
+        echo "sound_eq_custom5=0 (-12...12)" >> $BOEFFLA_CONFIG
         echo " " >> $BOEFFLA_CONFIG
 fi
 
@@ -153,6 +178,12 @@ fi
 /sbin/busybox sed "s/(default\/concert\/noisy)/(default\/concert\/noisy\/light)/g" $BOEFFLA_CONFIG -i
 /sbin/busybox sed "s/(on\/off\/smod)/(on\/off\/smod\/peg)/g" $BOEFFLA_CONFIG -i
 /sbin/busybox sed "s/(default\/cfq\/deadline\/noop\/sio)/(default\/cfq\/deadline\/noop\/sio\/row\/bfq)/g" $BOEFFLA_CONFIG -i
+/sbin/busybox sed "s/(1000\/1100\/1200)/(600...1200)/g" $BOEFFLA_CONFIG -i
+/sbin/busybox sed "s/(475\/700\/900)/(475...900)/g" $BOEFFLA_CONFIG -i
+/sbin/busybox sed "s/(default\/55\/57\/60\/62)/(default\/45...63)/g" $BOEFFLA_CONFIG -i
+/sbin/busybox sed "s/(default\/60\/63)/(default\/57...63)/g" $BOEFFLA_CONFIG -i
+/sbin/busybox sed "s/(default\/1200\/1000\/800\/600\/400)/(default\/200...1400)/g" $BOEFFLA_CONFIG -i
+/sbin/busybox sed "s/(off\/bass-extreme\/bass-treble\/treble\/classic\/pleasant\/eargasm)/(off\/bass-extreme\/bass-treble\/treble\/classic\/pleasant\/eargasm\/custom)/g" $BOEFFLA_CONFIG -i
 
 # Finally remove old options that are not required anymore
 /sbin/busybox sed "/Config file version/d" $BOEFFLA_CONFIG -i

@@ -13,49 +13,31 @@ fi
 
 # headphone levels
 
-if /sbin/busybox [ "`/sbin/busybox grep sound_headphone_vol=55 $BOEFFLA_CONFIG`" ]; then	
+# Initialize variable and read setting
+LEVEL=""
+LEVEL=$(/sbin/busybox sed -n -e 's/.*sound_headphone_vol=\(.*\)(.*/\1/p' $BOEFFLA_CONFIG)
+
+# Only apply value if valid and not default
+if [ ! "$LEVEL" = "default" ] && [ "${LEVEL:-0}" -ge 45 ] && [ "${LEVEL:-0}" -le 63 ] ; then
 	echo 1 > /sys/class/misc/boeffla_sound/boeffla_sound
-	echo "55 55" > /sys/class/misc/boeffla_sound/headphone_volume
+	echo "$LEVEL $LEVEL" > /sys/class/misc/boeffla_sound/headphone_volume
 
-	echo $(date) Headphone volume set to 55 >> $BOEFFLA_LOGFILE
-fi
-
-if /sbin/busybox [ "`/sbin/busybox grep sound_headphone_vol=57 $BOEFFLA_CONFIG`" ]; then	
-	echo 1 > /sys/class/misc/boeffla_sound/boeffla_sound
-	echo "57 57" > /sys/class/misc/boeffla_sound/headphone_volume
-
-	echo $(date) Headphone volume set to 57 >> $BOEFFLA_LOGFILE
-fi
-
-if /sbin/busybox [ "`/sbin/busybox grep sound_headphone_vol=60 $BOEFFLA_CONFIG`" ]; then	
-	echo 1 > /sys/class/misc/boeffla_sound/boeffla_sound
-	echo "60 60" > /sys/class/misc/boeffla_sound/headphone_volume
-
-	echo $(date) Headphone volume set to 60 >> $BOEFFLA_LOGFILE
-fi
-
-if /sbin/busybox [ "`/sbin/busybox grep sound_headphone_vol=62 $BOEFFLA_CONFIG`" ]; then	
-	echo 1 > /sys/class/misc/boeffla_sound/boeffla_sound
-	echo "62 62" > /sys/class/misc/boeffla_sound/headphone_volume
-
-	echo $(date) Headphone volume set to 62 >> $BOEFFLA_LOGFILE
+	echo $(date) Headphone volume set to $LEVEL >> $BOEFFLA_LOGFILE
 fi
 
 
 # speaker levels
 
-if /sbin/busybox [ "`/sbin/busybox grep sound_speaker_vol=60 $BOEFFLA_CONFIG`" ]; then	
+# Initialize variable and read setting
+LEVEL=""
+LEVEL=$(/sbin/busybox sed -n -e 's/.*sound_speaker_vol=\(.*\)(.*/\1/p' $BOEFFLA_CONFIG)
+
+# Only apply value if valid and not default
+if [ ! "$LEVEL" = "default" ] && [ "${LEVEL:-0}" -ge 57 ] && [ "${LEVEL:-0}" -le 63 ] ; then
 	echo 1 > /sys/class/misc/boeffla_sound/boeffla_sound
-	echo "60 60" > /sys/class/misc/boeffla_sound/speaker_volume
+	echo "$LEVEL $LEVEL" > /sys/class/misc/boeffla_sound/speaker_volume
 
-	echo $(date) Speaker volume set to 60 >> $BOEFFLA_LOGFILE
-fi
-
-if /sbin/busybox [ "`/sbin/busybox grep sound_speaker_vol=63 $BOEFFLA_CONFIG`" ]; then	
-	echo 1 > /sys/class/misc/boeffla_sound/boeffla_sound
-	echo "63 63" > /sys/class/misc/boeffla_sound/speaker_volume
-
-	echo $(date) Speaker volume set to 63 >> $BOEFFLA_LOGFILE
+	echo $(date) Speaker volume set to $LEVEL >> $BOEFFLA_LOGFILE
 fi
 
 
@@ -138,6 +120,67 @@ if /sbin/busybox [ "`/sbin/busybox grep sound_eq=eargasm $BOEFFLA_CONFIG`" ]; th
 
 	echo $(date) Equalizer preset eargasm applied >> $BOEFFLA_LOGFILE
 fi	
+
+if /sbin/busybox [ "`/sbin/busybox grep sound_eq=custom $BOEFFLA_CONFIG`" ]; then	
+	echo 1 > /sys/class/misc/boeffla_sound/boeffla_sound
+	echo $EQ_MODE > /sys/class/misc/boeffla_sound/eq
+	echo "1 4027 1031 0 276" > /sys/class/misc/boeffla_sound/eq_bands
+	echo "2 8076 61555 456 456" > /sys/class/misc/boeffla_sound/eq_bands
+	echo "3 7256 62323 2644 1368" > /sys/class/misc/boeffla_sound/eq_bands
+	echo "4 5774 63529 1965 4355" > /sys/class/misc/boeffla_sound/eq_bands
+	echo "5 1380 1369 0 16384" > /sys/class/misc/boeffla_sound/eq_bands
+
+	# Initialize variable and read setting for band 1
+	LEVEL=""
+	LEVEL=$(/sbin/busybox sed -n -e 's/.*sound_eq_custom1=\(.*\)(.*/\1/p' $BOEFFLA_CONFIG)
+
+	# Only apply value if valid and not default
+	if [ "${LEVEL:-0}" -ge -12 ] && [ "${LEVEL:-0}" -le 12 ] ; then
+		echo "1 $LEVEL" > /sys/class/misc/boeffla_sound/eq_gains_alt
+		echo $(date) Equalizer preset custom band1 $LEVEL applied >> $BOEFFLA_LOGFILE
+	fi
+
+	# Initialize variable and read setting for band 2
+	LEVEL=""
+	LEVEL=$(/sbin/busybox sed -n -e 's/.*sound_eq_custom2=\(.*\)(.*/\1/p' $BOEFFLA_CONFIG)
+
+	# Only apply value if valid and not default
+	if [ "${LEVEL:-0}" -ge -12 ] && [ "${LEVEL:-0}" -le 12 ] ; then
+		echo "2 $LEVEL" > /sys/class/misc/boeffla_sound/eq_gains_alt
+		echo $(date) Equalizer preset custom band2 $LEVEL applied >> $BOEFFLA_LOGFILE
+	fi
+
+	# Initialize variable and read setting for band 3
+	LEVEL=""
+	LEVEL=$(/sbin/busybox sed -n -e 's/.*sound_eq_custom3=\(.*\)(.*/\1/p' $BOEFFLA_CONFIG)
+
+	# Only apply value if valid and not default
+	if [ "${LEVEL:-0}" -ge -12 ] && [ "${LEVEL:-0}" -le 12 ] ; then
+		echo "3 $LEVEL" > /sys/class/misc/boeffla_sound/eq_gains_alt
+		echo $(date) Equalizer preset custom band3 $LEVEL applied >> $BOEFFLA_LOGFILE
+	fi
+
+	# Initialize variable and read setting for band 4
+	LEVEL=""
+	LEVEL=$(/sbin/busybox sed -n -e 's/.*sound_eq_custom4=\(.*\)(.*/\1/p' $BOEFFLA_CONFIG)
+
+	# Only apply value if valid and not default
+	if [ "${LEVEL:-0}" -ge -12 ] && [ "${LEVEL:-0}" -le 12 ] ; then
+		echo "4 $LEVEL" > /sys/class/misc/boeffla_sound/eq_gains_alt
+		echo $(date) Equalizer preset custom band4 $LEVEL applied >> $BOEFFLA_LOGFILE
+	fi
+
+	# Initialize variable and read setting for band 5
+	LEVEL=""
+	LEVEL=$(/sbin/busybox sed -n -e 's/.*sound_eq_custom5=\(.*\)(.*/\1/p' $BOEFFLA_CONFIG)
+
+	# Only apply value if valid and not default
+	if [ "${LEVEL:-0}" -ge -12 ] && [ "${LEVEL:-0}" -le 12 ] ; then
+		echo "5 $LEVEL" > /sys/class/misc/boeffla_sound/eq_gains_alt
+		echo $(date) Equalizer preset custom band5 $LEVEL applied >> $BOEFFLA_LOGFILE
+	fi
+fi	
+
 
 
 # DAC direct
