@@ -1,7 +1,7 @@
 /*
- * Author: andip71, 30.11.2012
+ * Author: andip71, 27.12.2012
  *
- * Version 1.2
+ * Version 1.4
  *
  * credits: Supercurio for ideas and partially code from his Voodoo
  * 	    sound implementation,
@@ -1554,6 +1554,67 @@ static ssize_t eq_gains_store(struct device *dev, struct device_attribute *attr,
 }
 
 
+// Equalizer gains (alternative interface to allow per band setting for script manager)
+
+static ssize_t eq_gains_alt_show(struct device *dev, struct device_attribute *attr, char *buf)
+{
+	// Terminate instantly if boeffla sound is not enabled
+	if (!boeffla_sound)
+		return 0;
+
+	// print current values
+	return sprintf(buf, "EQ gains (band/level):\n1: %d\n2: %d\n3: %d\n4: %d\n5: %d\n",
+			eq_gains[0], eq_gains[1], eq_gains[2], eq_gains[3], eq_gains[4]);
+}
+
+
+static ssize_t eq_gains_alt_store(struct device *dev, struct device_attribute *attr,
+					const char *buf, size_t count)
+{
+	unsigned int ret = -EINVAL;
+	int band;
+	int gain;
+
+	// Terminate instantly if boeffla sound is not enabled
+	if (!boeffla_sound)
+		return count;
+
+	// read values from input buffer
+	ret = sscanf(buf, "%d %d", &band, &gain);
+
+	// check validity of band value
+	if ((band >= 1) && (band <= 5))
+	{
+
+		// check validity of gain value and adjust
+		if (gain < EQ_GAIN_MIN)
+			gain = EQ_GAIN_MIN;
+
+		if (gain > EQ_GAIN_MAX)
+			gain = EQ_GAIN_MAX;
+
+		eq_gains[band-1] = gain;
+
+		// set new value(s)
+		set_eq_gains();
+
+		// print debug info
+		if (debug(DEBUG_NORMAL))
+			printk("Boeffla-sound: EQ gain set for band %d: %d\n",
+				band, gain);
+	}
+	else
+	{
+		// print debug info
+		if (debug(DEBUG_NORMAL))
+			printk("Boeffla-sound: Invalid band specified");
+
+	}
+
+	return count;
+}
+
+
 // Equalizer bands
 
 static ssize_t eq_bands_show(struct device *dev, struct device_attribute *attr, char *buf)
@@ -1978,6 +2039,7 @@ static DEVICE_ATTR(speaker_volume, S_IRUGO | S_IWUGO, speaker_volume_show, speak
 static DEVICE_ATTR(privacy_mode, S_IRUGO | S_IWUGO, privacy_mode_show, privacy_mode_store);
 static DEVICE_ATTR(eq, S_IRUGO | S_IWUGO, eq_show, eq_store);
 static DEVICE_ATTR(eq_gains, S_IRUGO | S_IWUGO, eq_gains_show, eq_gains_store);
+static DEVICE_ATTR(eq_gains_alt, S_IRUGO | S_IWUGO, eq_gains_alt_show, eq_gains_alt_store);
 static DEVICE_ATTR(eq_bands, S_IRUGO | S_IWUGO, eq_bands_show, eq_bands_store);
 static DEVICE_ATTR(dac_direct, S_IRUGO | S_IWUGO, dac_direct_show, dac_direct_store);
 static DEVICE_ATTR(dac_oversampling, S_IRUGO | S_IWUGO, dac_oversampling_show, dac_oversampling_store);
@@ -1996,6 +2058,7 @@ static struct attribute *boeffla_sound_attributes[] = {
 	&dev_attr_privacy_mode.attr,
 	&dev_attr_eq.attr,
 	&dev_attr_eq_gains.attr,
+	&dev_attr_eq_gains_alt.attr,
 	&dev_attr_eq_bands.attr,
 	&dev_attr_dac_direct.attr,
 	&dev_attr_dac_oversampling.attr,
