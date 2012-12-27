@@ -55,7 +55,7 @@ fi
 # Scheduler, governor, frequencies
 
 if ! /sbin/busybox [ "`/sbin/busybox grep scheduler $BOEFFLA_CONFIG`" ]; then
-	echo "scheduler=default (default/cfq/deadline/noop/sio)" >> $BOEFFLA_CONFIG
+	echo "scheduler=default (default/cfq/deadline/noop/sio/row/bfq)" >> $BOEFFLA_CONFIG
 	echo " " >> $BOEFFLA_CONFIG
 fi
 
@@ -152,6 +152,7 @@ fi
 /sbin/busybox sed "s/(default\/55\/60\/62)/(default\/55\/57\/60\/62)/g" $BOEFFLA_CONFIG -i
 /sbin/busybox sed "s/(default\/concert\/noisy)/(default\/concert\/noisy\/light)/g" $BOEFFLA_CONFIG -i
 /sbin/busybox sed "s/(on\/off\/smod)/(on\/off\/smod\/peg)/g" $BOEFFLA_CONFIG -i
+/sbin/busybox sed "s/(default\/cfq\/deadline\/noop\/sio)/(default\/cfq\/deadline\/noop\/sio\/row\/bfq)/g" $BOEFFLA_CONFIG -i
 
 # Finally remove old options that are not required anymore
 /sbin/busybox sed "/Config file version/d" $BOEFFLA_CONFIG -i

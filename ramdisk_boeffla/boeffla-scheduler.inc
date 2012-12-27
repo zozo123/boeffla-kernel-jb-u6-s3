@@ -18,6 +18,14 @@ if /sbin/busybox [ "`/sbin/busybox grep scheduler=sio $BOEFFLA_CONFIG`" ]; then
   SCHEDULER="sio"
 fi
 
+if /sbin/busybox [ "`/sbin/busybox grep scheduler=row $BOEFFLA_CONFIG`" ]; then
+  SCHEDULER="row"
+fi
+
+if /sbin/busybox [ "`/sbin/busybox grep scheduler=bfq $BOEFFLA_CONFIG`" ]; then
+  SCHEDULER="bfq"
+fi
+
 if [ ! -z $SCHEDULER ]; then
   echo "$SCHEDULER" > /sys/block/mmcblk0/queue/scheduler
   echo "$SCHEDULER" > /sys/block/mmcblk1/queue/scheduler
