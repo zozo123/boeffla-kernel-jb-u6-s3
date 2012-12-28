@@ -132,7 +132,7 @@ if /sbin/busybox [ "`/sbin/busybox grep sound_eq=custom $BOEFFLA_CONFIG`" ]; the
 
 	# Initialize variable and read setting for band 1
 	LEVEL=""
-	LEVEL=$(/sbin/busybox sed -n -e 's/.*sound_eq_custom1=\(.*\)(.*/\1/p' $BOEFFLA_CONFIG)
+	LEVEL=$(/sbin/busybox sed -n -e 's/.*sound_eq_custom_0100Hz=\(.*\)(.*/\1/p' $BOEFFLA_CONFIG)
 
 	# Only apply value if valid and not default
 	if [ "${LEVEL:-0}" -ge -12 ] && [ "${LEVEL:-0}" -le 12 ] ; then
@@ -142,7 +142,7 @@ if /sbin/busybox [ "`/sbin/busybox grep sound_eq=custom $BOEFFLA_CONFIG`" ]; the
 
 	# Initialize variable and read setting for band 2
 	LEVEL=""
-	LEVEL=$(/sbin/busybox sed -n -e 's/.*sound_eq_custom2=\(.*\)(.*/\1/p' $BOEFFLA_CONFIG)
+	LEVEL=$(/sbin/busybox sed -n -e 's/.*sound_eq_custom_0300Hz=\(.*\)(.*/\1/p' $BOEFFLA_CONFIG)
 
 	# Only apply value if valid and not default
 	if [ "${LEVEL:-0}" -ge -12 ] && [ "${LEVEL:-0}" -le 12 ] ; then
@@ -152,7 +152,7 @@ if /sbin/busybox [ "`/sbin/busybox grep sound_eq=custom $BOEFFLA_CONFIG`" ]; the
 
 	# Initialize variable and read setting for band 3
 	LEVEL=""
-	LEVEL=$(/sbin/busybox sed -n -e 's/.*sound_eq_custom3=\(.*\)(.*/\1/p' $BOEFFLA_CONFIG)
+	LEVEL=$(/sbin/busybox sed -n -e 's/.*sound_eq_custom_0875Hz=\(.*\)(.*/\1/p' $BOEFFLA_CONFIG)
 
 	# Only apply value if valid and not default
 	if [ "${LEVEL:-0}" -ge -12 ] && [ "${LEVEL:-0}" -le 12 ] ; then
@@ -162,7 +162,7 @@ if /sbin/busybox [ "`/sbin/busybox grep sound_eq=custom $BOEFFLA_CONFIG`" ]; the
 
 	# Initialize variable and read setting for band 4
 	LEVEL=""
-	LEVEL=$(/sbin/busybox sed -n -e 's/.*sound_eq_custom4=\(.*\)(.*/\1/p' $BOEFFLA_CONFIG)
+	LEVEL=$(/sbin/busybox sed -n -e 's/.*sound_eq_custom_2400Hz=\(.*\)(.*/\1/p' $BOEFFLA_CONFIG)
 
 	# Only apply value if valid and not default
 	if [ "${LEVEL:-0}" -ge -12 ] && [ "${LEVEL:-0}" -le 12 ] ; then
@@ -172,7 +172,7 @@ if /sbin/busybox [ "`/sbin/busybox grep sound_eq=custom $BOEFFLA_CONFIG`" ]; the
 
 	# Initialize variable and read setting for band 5
 	LEVEL=""
-	LEVEL=$(/sbin/busybox sed -n -e 's/.*sound_eq_custom5=\(.*\)(.*/\1/p' $BOEFFLA_CONFIG)
+	LEVEL=$(/sbin/busybox sed -n -e 's/.*sound_eq_custom_6900Hz=\(.*\)(.*/\1/p' $BOEFFLA_CONFIG)
 
 	# Only apply value if valid and not default
 	if [ "${LEVEL:-0}" -ge -12 ] && [ "${LEVEL:-0}" -le 12 ] ; then

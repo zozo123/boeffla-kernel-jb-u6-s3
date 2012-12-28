@@ -100,28 +100,28 @@ if ! /sbin/busybox [ "`/sbin/busybox grep sound_eq $BOEFFLA_CONFIG`" ]; then
         echo " " >> $BOEFFLA_CONFIG
 fi
 
-if ! /sbin/busybox [ "`/sbin/busybox grep sound_eq_custom1 $BOEFFLA_CONFIG`" ]; then
-        echo "sound_eq_custom1=0 (-12...12)" >> $BOEFFLA_CONFIG
+if ! /sbin/busybox [ "`/sbin/busybox grep sound_eq_custom_0100Hz $BOEFFLA_CONFIG`" ]; then
+        echo "sound_eq_custom_0100Hz=0 (-12...12)" >> $BOEFFLA_CONFIG
         echo " " >> $BOEFFLA_CONFIG
 fi
 
-if ! /sbin/busybox [ "`/sbin/busybox grep sound_eq_custom2 $BOEFFLA_CONFIG`" ]; then
-        echo "sound_eq_custom2=0 (-12...12)" >> $BOEFFLA_CONFIG
+if ! /sbin/busybox [ "`/sbin/busybox grep sound_eq_custom_0300Hz $BOEFFLA_CONFIG`" ]; then
+        echo "sound_eq_custom_0300Hz=0 (-12...12)" >> $BOEFFLA_CONFIG
         echo " " >> $BOEFFLA_CONFIG
 fi
 
-if ! /sbin/busybox [ "`/sbin/busybox grep sound_eq_custom3 $BOEFFLA_CONFIG`" ]; then
-        echo "sound_eq_custom3=0 (-12...12)" >> $BOEFFLA_CONFIG
+if ! /sbin/busybox [ "`/sbin/busybox grep sound_eq_custom_0875Hz $BOEFFLA_CONFIG`" ]; then
+        echo "sound_eq_custom_0875Hz=0 (-12...12)" >> $BOEFFLA_CONFIG
         echo " " >> $BOEFFLA_CONFIG
 fi
 
-if ! /sbin/busybox [ "`/sbin/busybox grep sound_eq_custom4 $BOEFFLA_CONFIG`" ]; then
-        echo "sound_eq_custom4=0 (-12...12)" >> $BOEFFLA_CONFIG
+if ! /sbin/busybox [ "`/sbin/busybox grep sound_eq_custom_2400Hz $BOEFFLA_CONFIG`" ]; then
+        echo "sound_eq_custom_2400Hz=0 (-12...12)" >> $BOEFFLA_CONFIG
         echo " " >> $BOEFFLA_CONFIG
 fi
 
-if ! /sbin/busybox [ "`/sbin/busybox grep sound_eq_custom5 $BOEFFLA_CONFIG`" ]; then
-        echo "sound_eq_custom5=0 (-12...12)" >> $BOEFFLA_CONFIG
+if ! /sbin/busybox [ "`/sbin/busybox grep sound_eq_custom_6900Hz $BOEFFLA_CONFIG`" ]; then
+        echo "sound_eq_custom_6900Hz=0 (-12...12)" >> $BOEFFLA_CONFIG
         echo " " >> $BOEFFLA_CONFIG
 fi
 
@@ -155,6 +155,13 @@ fi
 
 if ! /sbin/busybox [ "`/sbin/busybox grep autoroot $BOEFFLA_CONFIG`" ]; then
 	echo "autoroot=off (off/on)" >> $BOEFFLA_CONFIG
+	echo " " >> $BOEFFLA_CONFIG
+fi
+
+
+# Configuration app
+if ! /sbin/busybox [ "`/sbin/busybox grep boeffla_app $BOEFFLA_CONFIG`" ]; then
+	echo "boeffla_app=on (on/off)" >> $BOEFFLA_CONFIG
 	echo " " >> $BOEFFLA_CONFIG
 fi
 
