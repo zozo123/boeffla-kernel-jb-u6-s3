@@ -1,7 +1,7 @@
 /*
- * Author: andip71, 27.12.2012
+ * Author: andip71, 31.12.2012
  *
- * Version 1.4
+ * Version 1.41
  *
  * credits: Supercurio for ideas and partially code from his Voodoo
  * 	    sound implementation,
@@ -33,7 +33,7 @@ unsigned int Boeffla_sound_hook_wm8994_write(unsigned int reg, unsigned int valu
 
 // Boeffla sound general
 #define BOEFFLA_SOUND_DEFAULT 	0
-#define BOEFFLA_SOUND_VERSION 	"1.4"
+#define BOEFFLA_SOUND_VERSION 	"1.4.1"
 
 // Debug mode
 #define DEBUG_DEFAULT 		1

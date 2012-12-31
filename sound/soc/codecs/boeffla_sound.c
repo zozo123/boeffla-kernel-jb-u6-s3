@@ -84,6 +84,7 @@ static bool check_for_call(unsigned int val);
 static bool check_for_socket(unsigned int val);
 static bool check_for_headphone(void);
 static bool check_for_fmradio(void);
+static void handler_headphone_detection(void);
 
 static void set_headphone(void);
 static unsigned int get_headphone_l(unsigned int val);
@@ -160,6 +161,7 @@ unsigned int Boeffla_sound_hook_wm8994_write(unsigned int reg, unsigned int val)
 				set_eq();
 				set_mic_mode();
 			}
+
 			break;
 		}
 
@@ -314,17 +316,7 @@ unsigned int Boeffla_sound_hook_wm8994_write(unsigned int reg, unsigned int val)
 	// ( for un-plug detection see above, this is covered by checking a register)
 	if (is_socket && !is_headphone)
 	{
-		if (check_for_headphone())
-		{
-			is_headphone = true;
-
-			if (debug(DEBUG_NORMAL))
-				printk("Boeffla-sound: Headphone or headset found\n");
-
-			// Handler: switch equalizer and set speaker volume (for privacy mode)
-			set_eq();
-			set_speaker();
-		}
+		handler_headphone_detection();
 	}
 
 	// FM radio detection
@@ -563,6 +555,22 @@ static bool check_for_fmradio(void)
 	}
 
 	return false;
+}
+
+
+static void handler_headphone_detection(void)
+{
+	if (check_for_headphone())
+	{
+		is_headphone = true;
+
+		if (debug(DEBUG_NORMAL))
+			printk("Boeffla-sound: Headphone or headset found\n");
+
+		// Handler: switch equalizer and set speaker volume (for privacy mode)
+		set_eq();
+		set_speaker();
+	}
 }
 
 
@@ -1321,16 +1329,24 @@ static ssize_t boeffla_sound_store(struct device *dev, struct device_attribute *
 	// store if valid data and only if status has changed, reset all values
 	if (((val == OFF) || (val == ON))&& (val != boeffla_sound))
 	{
+		// print debug info
+		if (debug(DEBUG_NORMAL))
+			printk("Boeffla-sound: status %d\n", boeffla_sound);
+
+		// Initialize Boeffla-Sound
 		boeffla_sound = val;
 		reset_boeffla_sound();
+
+		// If Boeffla-Sound was switched on, set correct status for
+		// headphone and fm_radio (assuming there is never a call when switching Sound on)
+		if (boeffla_sound == ON)
+		{
+			handler_headphone_detection();
+			is_fmradio = check_for_fmradio();
+		}
 	}
 
-	// print debug info
-	if (debug(DEBUG_NORMAL))
-		printk("Boeffla-sound: status %d\n", boeffla_sound);
-
 	return count;
-
 }
 
 
