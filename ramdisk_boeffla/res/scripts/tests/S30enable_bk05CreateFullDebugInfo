@@ -1,0 +1,149 @@
+#!/system/bin/sh
+#Debug: Create full debug info file
+#Creates a file boeffla-debug.txt on your sdcard, send it to support@boeffla-kernel.de
+
+LOGFILE="/sdcard/boeffla-debug.txt"
+
+echo $(date) Full debug log file start > $LOGFILE
+echo "\n============================================\n" >> $LOGFILE
+
+echo "\n**** Boeffla-Kernel config\n" >> $LOGFILE
+cat /sdcard/boeffla-kernel/boeffla-kernel.conf  >> $LOGFILE
+
+echo "\n**** Boeffla-Kernel log\n" >> $LOGFILE
+cat /sdcard/boeffla-kernel/boeffla-kernel.log >> $LOGFILE
+
+echo "\n**** Boeffla-Kernel log 1\n" >> $LOGFILE
+cat /sdcard/boeffla-kernel/boeffla-kernel.log.1 >> $LOGFILE
+
+echo "\n**** Boeffla-Kernel log 2\n" >> $LOGFILE
+cat /sdcard/boeffla-kernel/boeffla-kernel.log.2 >> $LOGFILE
+
+echo "\n**** Boeffla-Kernel log 3\n" >> $LOGFILE
+cat /sdcard/boeffla-kernel/boeffla-kernel.log.3 >> $LOGFILE
+
+echo "\n============================================\n" >> $LOGFILE
+
+echo "\n**** boeffla_sound\n" >> $LOGFILE
+cat /sys/class/misc/boeffla_sound/boeffla_sound >> $LOGFILE
+
+echo "\n**** headphone_volume\n" >> $LOGFILE
+cat /sys/class/misc/boeffla_sound/headphone_volume >> $LOGFILE
+
+echo "\n**** speaker_volume\n" >> $LOGFILE
+cat /sys/class/misc/boeffla_sound/speaker_volume >> $LOGFILE
+
+echo "\n**** privacy_mode\n" >> $LOGFILE
+cat /sys/class/misc/boeffla_sound/privacy_mode >> $LOGFILE
+
+echo "\n**** equalizer\n" >> $LOGFILE
+cat /sys/class/misc/boeffla_sound/eq >> $LOGFILE
+
+echo "\n**** eq_gains\n" >> $LOGFILE
+cat /sys/class/misc/boeffla_sound/eq_gains >> $LOGFILE
+
+echo "\n**** eq_gains_alt\n" >> $LOGFILE
+cat /sys/class/misc/boeffla_sound/eq_gains_alt >> $LOGFILE
+
+echo "\n**** eq_bands\n" >> $LOGFILE
+cat /sys/class/misc/boeffla_sound/eq_bands >> $LOGFILE
+
+echo "\n**** dac_direct\n" >> $LOGFILE
+cat /sys/class/misc/boeffla_sound/dac_direct >> $LOGFILE
+
+echo "\n**** dac_oversampling\n" >> $LOGFILE
+cat /sys/class/misc/boeffla_sound/dac_oversampling >> $LOGFILE
+
+echo "\n**** fll_tuning\n" >> $LOGFILE
+cat /sys/class/misc/boeffla_sound/fll_tuning >> $LOGFILE
+
+echo "\n**** mic_mode\n" >> $LOGFILE
+cat /sys/class/misc/boeffla_sound/mic_mode >> $LOGFILE
+
+echo "\n**** debug_level\n" >> $LOGFILE
+cat /sys/class/misc/boeffla_sound/debug_level >> $LOGFILE
+
+echo "\n**** debug_info\n" >> $LOGFILE
+cat /sys/class/misc/boeffla_sound/debug_info >> $LOGFILE
+
+echo "\n**** version\n" >> $LOGFILE
+cat /sys/class/misc/boeffla_sound/version >> $LOGFILE
+
+echo "\n============================================\n" >> $LOGFILE
+
+echo "\n**** Loaded modules:\n" >> $LOGFILE
+lsmod >> $LOGFILE
+
+echo "\n**** Max CPU frequency:\n" >> $LOGFILE
+cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq >> $LOGFILE
+
+echo "\n**** Root:\n" >> $LOGFILE
+ls /system/xbin/su >> $LOGFILE
+ls /system/app/Superuser.apk >> $LOGFILE
+
+echo "\n**** Mounts:\n" >> $LOGFILE
+mount | grep /data >> $LOGFILE
+mount | grep /cache >> $LOGFILE
+
+echo "\n**** SD Card read ahead:\n" >> $LOGFILE
+cat /sys/block/mmcblk0/bdi/read_ahead_kb >> $LOGFILE
+cat /sys/block/mmcblk1/bdi/read_ahead_kb >> $LOGFILE
+
+echo "\n**** System tweaks (swappiness/vfs_cache_pressure/dirty_background_ratio/dirty_ratio/drop_caches:\n" >> $LOGFILE
+cat /proc/sys/vm/swappiness >> $LOGFILE
+cat /proc/sys/vm/vfs_cache_pressure >> $LOGFILE
+cat /proc/sys/vm/dirty_background_ratio >> $LOGFILE
+cat /proc/sys/vm/dirty_ratio >> $LOGFILE
+cat /proc/sys/vm/drop_caches >> $LOGFILE
+
+echo "\n**** CPU undervolting:\n" >> $LOGFILE
+cat /sys/devices/system/cpu/cpu0/cpufreq/UV_mV_table >> $LOGFILE
+
+echo "\n**** GPU undervolting:\n" >> $LOGFILE
+cat /sys/class/misc/gpu_voltage_control/gpu_control >> $LOGFILE
+
+echo "\n**** Charging levels:\n" >> $LOGFILE
+cat /sys/kernel/charge_level/charge_level >> $LOGFILE
+
+echo "\n**** Governor:\n" >> $LOGFILE
+cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor >> $LOGFILE
+
+echo "\n**** Scheduler:\n" >> $LOGFILE
+cat /sys/block/mmcblk0/queue/scheduler >> $LOGFILE
+cat /sys/block/mmcblk1/queue/scheduler >> $LOGFILE
+
+echo "\n**** Kernel Logger:\n" >> $LOGFILE
+cat /sys/kernel/printk_mode/printk_mode >> $LOGFILE
+
+echo "\n**** Sharpness fix:\n" >> $LOGFILE
+cat /sys/class/misc/mdnie_preset/mdnie_preset >> $LOGFILE
+
+echo "\n============================================\n" >> $LOGFILE
+
+echo "\n**** Memory:\n" >> $LOGFILE
+free -m >> $LOGFILE
+
+echo "\n**** Storage:\n" >> $LOGFILE
+df >> $LOGFILE
+
+echo "\n**** Mounts:\n" >> $LOGFILE
+mount >> $LOGFILE
+
+echo "\n**** /system/etc/init.d folder\n" >> $LOGFILE
+ls -l /system/etc/init.d >> $LOGFILE
+
+echo "\n**** /etc/init.d folder\n" >> $LOGFILE
+ls -l /etc/init.d >> $LOGFILE
+
+echo "\n**** /data/init.d folder\n" >> $LOGFILE
+ls -l /data/init.d >> $LOGFILE
+
+echo "\n**** last_kmsg\n" >> $LOGFILE
+cat /proc/last_kmsg  >> $LOGFILE
+
+echo "\n**** dmesg\n" >> $LOGFILE
+dmesg  >> $LOGFILE
+
+echo "\n============================================\n" >> $LOGFILE
+echo $(date) Full debug log file end >> $LOGFILE
+
