@@ -100,6 +100,11 @@ if ! /sbin/busybox [ "`/sbin/busybox grep sound_eq $BOEFFLA_CONFIG`" ]; then
         echo " " >> $BOEFFLA_CONFIG
 fi
 
+if ! /sbin/busybox [ "`/sbin/busybox grep sound_satprevent $BOEFFLA_CONFIG`" ]; then
+        echo "sound_satprevent=on (on/off)" >> $BOEFFLA_CONFIG
+        echo " " >> $BOEFFLA_CONFIG
+fi
+
 if ! /sbin/busybox [ "`/sbin/busybox grep sound_eq_custom_0100Hz $BOEFFLA_CONFIG`" ]; then
         echo "sound_eq_custom_0100Hz=0 (-12...12)" >> $BOEFFLA_CONFIG
         echo " " >> $BOEFFLA_CONFIG

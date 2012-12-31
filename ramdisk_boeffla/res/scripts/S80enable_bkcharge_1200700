@@ -1,0 +1,6 @@
+#!/system/bin/sh
+#Charging Rates
+#Set AC/USB Charging Rates:
+#AC: 1200 mA, USB: 700 mA
+
+echo "1200 700" >> /sys/kernel/charge_level/charge_level

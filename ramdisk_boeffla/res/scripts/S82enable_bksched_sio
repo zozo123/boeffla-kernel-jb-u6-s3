@@ -1,0 +1,7 @@
+#!/system/bin/sh
+#Scheduler
+#Change I/O scheduler:
+#SIO
+
+echo "sio" > /sys/block/mmcblk0/queue/scheduler
+echo "sio" > /sys/block/mmcblk1/queue/scheduler

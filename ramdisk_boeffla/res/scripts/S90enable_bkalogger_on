@@ -1,0 +1,7 @@
+#!/system/bin/sh
+#Android Logger
+#Requires reboot!!! Enable or disable Android Logger:
+#On
+
+echo "Configured by boeffla tweaks app" > /data/boeffla-alogger
+

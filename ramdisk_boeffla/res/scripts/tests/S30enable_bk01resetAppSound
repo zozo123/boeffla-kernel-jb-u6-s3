@@ -1,0 +1,12 @@
+#!/system/bin/sh
+#App: Reset Boeffla-Sound settings
+#Resets Boeffla-Sound settings done via the Boeffla Tweaks app
+
+SYSTEM_DEVICE="/dev/block/mmcblk0p9"
+
+/sbin/busybox mount -o remount,rw -t ext4 $SYSTEM_DEVICE /system
+/sbin/busybox rm /system/etc/init.d/*_bkbs*
+/sbin/busybox mount -o remount,ro -t ext4 $SYSTEM_DEVICE /system
+
+echo "0" > /sys/class/misc/boeffla_sound/boeffla_sound
+

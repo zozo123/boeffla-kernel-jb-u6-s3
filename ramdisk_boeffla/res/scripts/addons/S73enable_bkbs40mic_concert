@@ -1,0 +1,7 @@
+#!/system/bin/sh
+#Microphone mode
+#Set recording preset:
+#Concert
+
+echo 1 > /sys/class/misc/boeffla_sound/boeffla_sound
+echo 1 > /sys/class/misc/boeffla_sound/mic_mode

@@ -1,0 +1,96 @@
+#!/system/bin/sh
+#System Tweaks
+#Tweak various system settings:
+#peg (pegasusq tweaks)
+
+# Clean previously set tweaks
+
+	# Clean Boeffla-Kernel tweaks
+
+	# Revert file system tweaks
+	/sbin/busybox sysctl -w fs.inotify.max_queued_events=16384
+	/sbin/busybox sysctl -w fs.file-max=78082
+	/sbin/busybox sysctl -w fs.inotify.max_user_instances=128
+	/sbin/busybox sysctl -w fs.inotify.max_user_watches=8192
+	/sbin/busybox sysctl -w fs.lease-break-time=45
+
+	# Revert kernel setting tweaks
+	/sbin/busybox sysctl -w kernel.msgmax=8192
+	/sbin/busybox sysctl -w kernel.msgmni=1255
+	/sbin/busybox sysctl -w kernel.panic=1
+	/sbin/busybox sysctl -w kernel.random.read_wakeup_threshold=64
+	/sbin/busybox sysctl -w kernel.random.write_wakeup_threshold=128
+	/sbin/busybox sysctl -w kernel.sched_latency_ns=9999999
+	/sbin/busybox sysctl -w kernel.sched_wakeup_granularity_ns=1999998
+	/sbin/busybox sysctl -w kernel.sched_min_granularity_ns=2250000
+	/sbin/busybox sysctl -w kernel.sem='250 32000 32 128'
+	/sbin/busybox sysctl -w kernel.shmmax=33554432
+	/sbin/busybox sysctl -w kernel.threads-max=12203
+
+	# Revert net tweaks
+	/sbin/busybox sysctl -w net.core.rmem_max=131071
+	/sbin/busybox sysctl -w net.core.wmem_max=2097152
+	/sbin/busybox sysctl -w net.ipv4.tcp_rmem='524288 1048576 2097152'
+	/sbin/busybox sysctl -w net.ipv4.tcp_tw_recycle=0
+	/sbin/busybox sysctl -w net.ipv4.tcp_wmem='262144 524288 1048576'
+
+	# Revert vm tweaks
+	/sbin/busybox sysctl -w vm.dirty_background_ratio=5
+	/sbin/busybox sysctl -w vm.dirty_expire_centisecs=200
+	/sbin/busybox sysctl -w vm.dirty_ratio=20
+	/sbin/busybox sysctl -w vm.dirty_writeback_centisecs=500
+	/sbin/busybox sysctl -w vm.min_free_kbytes=3638
+	/sbin/busybox sysctl -w vm.swappiness=60
+	/sbin/busybox sysctl -w vm.vfs_cache_pressure=100
+	/sbin/busybox sync
+	/sbin/busybox sysctl -w vm.drop_caches=0
+
+	# Clean Speedmod tweaks + Pegasusq tweaks
+
+	# vm tweaks
+	echo "3638" > /proc/sys/vm/min_free_kbytes
+	echo "500" > /proc/sys/vm/dirty_writeback_centisecs
+	echo "200" > /proc/sys/vm/dirty_expire_centisecs
+	echo "60" > /proc/sys/vm/swappiness
+
+	# Pegasus CPU hotplug tweaks
+	echo "500000" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_freq_1_1
+	echo "500000" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_freq_2_1
+	echo "500000" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_freq_3_1
+	echo "200000" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_freq_2_0
+	echo "200000" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_freq_3_0
+	echo "200000" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_freq_4_0
+
+	echo "100" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_rq_1_1
+	echo "100" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_rq_2_0
+	echo "200" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_rq_2_1
+	echo "200" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_rq_3_0
+	echo "300" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_rq_3_1
+	echo "300" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_rq_4_0
+
+	echo "20" > /sys/devices/system/cpu/cpufreq/pegasusq/cpu_down_rate
+
+	# TCP tweaks
+	echo "5" > /proc/sys/net/ipv4/tcp_syn_retries
+	echo "5" > /proc/sys/net/ipv4/tcp_synack_retries
+	echo "60" > /proc/sys/net/ipv4/tcp_fin_timeout
+
+
+# Apply PegasusQ tweaks
+
+	# Pegasus CPU hotplug tweaks
+	echo "500000" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_freq_1_1
+	echo "800000" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_freq_2_1
+	echo "800000" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_freq_3_1
+	echo "400000" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_freq_2_0
+	echo "600000" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_freq_3_0
+	echo "600000" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_freq_4_0
+
+	echo "100" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_rq_1_1
+	echo "100" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_rq_2_0
+	echo "200" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_rq_2_1
+	echo "200" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_rq_3_0
+	echo "300" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_rq_3_1
+	echo "300" > /sys/devices/system/cpu/cpufreq/pegasusq/hotplug_rq_4_0
+
+	echo "10" > /sys/devices/system/cpu/cpufreq/pegasusq/cpu_down_rate

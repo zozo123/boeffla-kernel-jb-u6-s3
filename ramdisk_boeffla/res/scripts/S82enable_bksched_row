@@ -1,0 +1,7 @@
+#!/system/bin/sh
+#Scheduler
+#Change I/O scheduler:
+#Row
+
+echo "row" > /sys/block/mmcblk0/queue/scheduler
+echo "row" > /sys/block/mmcblk1/queue/scheduler

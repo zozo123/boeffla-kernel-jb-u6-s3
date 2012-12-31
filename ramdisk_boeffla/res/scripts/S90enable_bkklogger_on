@@ -1,0 +1,8 @@
+#!/system/bin/sh
+#Kernel Logger
+#Enable or disable Linux kernel logger:
+#On
+
+echo "1" > /sys/kernel/printk_mode/printk_mode
+
+echo "Configured by boeffla tweaks app" > /data/boeffla-klogger

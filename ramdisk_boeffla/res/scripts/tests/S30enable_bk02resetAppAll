@@ -1,0 +1,11 @@
+#!/system/bin/sh
+#App: Reset all settings
+#Resets all settings done via the Boeffla Tweaks app
+
+SYSTEM_DEVICE="/dev/block/mmcblk0p9"
+
+/sbin/busybox mount -o remount,rw -t ext4 $SYSTEM_DEVICE /system
+/sbin/busybox rm /system/etc/init.d/*_bk*
+/sbin/busybox mount -o remount,ro -t ext4 $SYSTEM_DEVICE /system
+
+

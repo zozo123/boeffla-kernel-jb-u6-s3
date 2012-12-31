@@ -3,7 +3,7 @@
 # initialisation
 EQ_MODE=1
 
-# check for hidden option to disable equalizer saturation prevention
+# check for option to disable equalizer saturation prevention
 if /sbin/busybox [ "`/sbin/busybox grep sound_satprevent=off $BOEFFLA_CONFIG`" ]; then	
 	EQ_MODE=2
 

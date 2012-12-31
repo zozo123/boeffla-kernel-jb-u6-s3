@@ -1,0 +1,6 @@
+#!/system/bin/sh
+#Delete boeffla-kernel.conf
+#Deletes the boeffla-kernel.conf file (next start will create new standard config file)
+
+/sbin/busybox rm /sdcard/boeffla-kernel/boeffla-kernel.conf
+

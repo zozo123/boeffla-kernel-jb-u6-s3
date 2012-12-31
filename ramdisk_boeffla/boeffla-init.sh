@@ -73,6 +73,9 @@ sleep 8
 # Auto root support
 . /sbin/boeffla-autoroot.inc
 
+# Configuration app support
+. /sbin/boeffla-app.inc
+
 # Ext4 tweaks
 . /sbin/boeffla-ext4.inc
 

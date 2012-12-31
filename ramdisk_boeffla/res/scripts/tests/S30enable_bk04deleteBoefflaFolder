@@ -1,0 +1,6 @@
+#!/system/bin/sh
+#Delete boeffla-kernel folder
+#Deletes the boeffla-kernel folder on your sdcard completely
+
+/sbin/busybox rm -r -f /sdcard/boeffla-kernel
+

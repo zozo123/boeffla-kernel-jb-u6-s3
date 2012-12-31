@@ -1,0 +1,7 @@
+#!/system/bin/sh
+#Android Logger
+#Requires reboot!!! Enable or disable Android Logger:
+#Off (default)
+
+/sbin/busybox rm /data/boeffla-alogger
+
