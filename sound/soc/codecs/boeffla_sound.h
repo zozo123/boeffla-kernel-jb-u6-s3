@@ -1,7 +1,7 @@
 /*
- * Author: andip71, 31.12.2012
+ * Author: andip71, 01.01.2013
  *
- * Version 1.41
+ * Version 1.4.2
  *
  * credits: Supercurio for ideas and partially code from his Voodoo
  * 	    sound implementation,
@@ -96,7 +96,7 @@ unsigned int Boeffla_sound_hook_wm8994_write(unsigned int reg, unsigned int valu
 #define FLL_LOOP_GAIN_TUNED	5
 
 // headphone levels
-#define HEADPHONE_DEFAULT 	45
+#define HEADPHONE_DEFAULT 	50
 
 #define HEADPHONE_MAX 		63
 #define HEADPHONE_MIN 		45
